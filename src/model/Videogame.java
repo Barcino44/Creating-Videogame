@@ -57,9 +57,9 @@ public class Videogame {
 		}
 		return pos;
 	}
-	public String addTreasureToLevel(int numberLevel, String name, String url, int score, int positionX, int positionY){
+	public String addTreasureToLevel(int numberLevel, String name, String url, int score, int quantyOfTresaure, int positionX, int positionY){
 		String msj="No se ha podido anadir el tesoro";
-		Treasure newTreasure = new Treasure(name, url, score, positionX, positionY);
+		Treasure newTreasure = new Treasure(name, url, score, quantyOfTresaure, positionX, positionY);
 		int numberOfLevel=validateIfLevelExist(numberLevel);
 		if(numberOfLevel!=-1){
 			msj=levels[numberOfLevel].addTreasureWithObject(newTreasure)+levels[numberOfLevel].getNumber();

@@ -4,10 +4,11 @@ public class Treasure {
 	private String name;
 	private String url;
 	private int score;
+	private int quantyOfTreasure;
 	private int positionX;
 	private int positionY;
 	
-	public Treasure(String name, String url, int score, int positionX, int positionY) {
+	public Treasure(String name, String url, int score, int quantyOfTreasure, int positionX, int positionY) {
 		this.name = name;
 		this.url = url;
 		this.score = score;
@@ -31,6 +32,12 @@ public class Treasure {
 	}
 	public void setScore(int score){
 		this.score = score; 
+	}
+	public int getQuantyOfTreasure() {
+		return quantyOfTreasure;
+	}
+	public void setQuatyOfTreasure(int quantyOfTreasure){
+		this.quantyOfTreasure = quantyOfTreasure; 
 	}
 	public int getPositionX() {
 		return positionX;
