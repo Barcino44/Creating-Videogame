@@ -2,43 +2,52 @@ package model;
 
 public class Enemy {
 
-	private String name;
-	private String url;
-	private int score;
-	private int quantyOfTreasure;
+	private String id;
+	private String type;
+	private int scoreWin;
+	private int scoreLose;
+	private int quantyOfEnemy;
 	private int positionX;
 	private int positionY;
 	
-	public Treasure(String name, String url, int score, int quantyOfTreasure, int positionX, int positionY) {
-		this.name = name;
-		this.url = url;
-		this.score = score;
-		this.positionX = positionX;
+	public Enemy(String id, String type, int scoreWin, int scoreLose, int quantyOfEnemy, int positionX, int positionY) {
+		this.id = id;
+		this.type = type;
+		this.scoreWin = scoreWin;
+		this.scoreLose = scoreLose;
+		this.quantyOfEnemy=quantyOfEnemy;
+		this.positionX=positionX;
 		this.positionY=positionY;
 	}
-	public String getName() {
-		return name;
+	public String getId() {
+		return id;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getUrl() {
-		return url;
+	public String getType() {
+		return type;
 	}
-	public void setUrl(String url) {
-		this.url = url;
+	public void setType(String type) {
+		this.type = type;
 	}
-	public int getScore() {
-		return score;
+	public int getScoreWin() {
+		return scoreWin;
 	}
-	public void setScore(int score){
-		this.score = score; 
+	public void setScoreWin(int scoreWin){
+		this.scoreWin = scoreWin; 
 	}
-	public int getQuantyOfTreasure() {
-		return quantyOfTreasure;
+	public int getScoreLose() { 
+		return scoreLose;
 	}
-	public void setQuatyOfTreasure(int quantyOfTreasure){
-		this.quantyOfTreasure = quantyOfTreasure; 
+	public void setScoreLose(int scoreLose){
+		this.scoreLose = scoreLose; 
+	}
+	public int getQuantyOfEnemy() {
+		return quantyOfEnemy;
+	}
+	public void setQuantyOfEnemy(int quantyOfEnemy){
+		this.quantyOfEnemy = quantyOfEnemy; 
 	}
 	public int getPositionX() {
 		return positionX;

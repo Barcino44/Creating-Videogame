@@ -67,4 +67,14 @@ public class Videogame {
 		}
 		return msj;
 	}
+	public String addEnemyToLevel(int numberLevel, String id, String type, int scoreWin, int scoreLose, int quantyOfEnemy, int positionX, int positionY){
+		String msj="No se ha podido anadir el enemigo";
+		Enemy newEnemy = new Enemy(id, type, scoreWin, scoreLose, quantyOfEnemy, positionX, positionY);
+		int numberOfLevel=validateIfLevelExist(numberLevel);
+		if(numberOfLevel!=-1){
+			msj=levels[numberOfLevel].addEnemyWithObject(newEnemy)+levels[numberOfLevel].getNumber();
+	
+		}
+		return msj;
+	}
 }

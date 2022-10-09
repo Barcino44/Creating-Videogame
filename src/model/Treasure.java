@@ -12,6 +12,7 @@ public class Treasure {
 		this.name = name;
 		this.url = url;
 		this.score = score;
+		this.quantyOfTreasure=quantyOfTreasure;
 		this.positionX = positionX;
 		this.positionY=positionY;
 	}

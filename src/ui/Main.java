@@ -58,6 +58,20 @@ public class Main{
 			int quantyOfTreasure=0;
 			int treasurePositionX=0;
 			int treasurePositionY=0;
+			String enemyId="";
+			String typeEnemy="";
+			String validation=("Ingrese el tipo de enemigo a anadir\n"+
+									  "Los posibles tipos de enemigos son:\n"+
+									  "Ogro\n"+
+									  "Abstracto\n"+
+									  "Jefe\n"+
+									  "Magico");
+			int scoreEnemyWin=0;
+			int scoreEnemyLose=0;
+			int quantyOfEnemy=0;
+			int enemyPositionX=0;
+			int enemyPositionY=0;
+
 			switch(option){
 				case 1: 
 					System.out.println("Digite el Id del player");
@@ -78,7 +92,7 @@ public class Main{
 
 					if(videogame.validateIfLevelExist(numberLevel)!=-1){
 							System.out.println("El nivel ya existe");
-								break;
+							break;
 						}
 					System.out.println("Digite el puntaje requerido para pasarlo");
 					while(!reader.hasNextInt()){
@@ -101,7 +115,7 @@ public class Main{
 
 					if(videogame.validateIfLevelExist(numberLevel)==-1){
 							System.out.println("El nivel no existe");
-								break;
+							break;
 						}
 
 					//Nombre del tesoro
@@ -144,14 +158,81 @@ public class Main{
 							System.out.println("Invalido, las posiciones son numeros enteros");
 						}
 					treasurePositionY=reader.nextInt();
-
+					//Confirmation
 					msj=videogame.addTreasureToLevel(numberLevel, treasureName, treasureUrl, treasureScore, quantyOfTreasure, treasurePositionX, treasurePositionY);
 					System.out.println(msj);
 
 					break;
-
+					
 				case 4: 
+						//Nivel donde se va a anadir el enemigo
+					System.out.println("Ingrese el numero de nivel donde sea anadir el enemigo");
+						 while(!reader.hasNextInt()){
+							reader.next();
+							System.out.println("Invalido, digite un numero de nivel");
+						}
+					numberLevel=reader.nextInt();
 
+					if(videogame.validateIfLevelExist(numberLevel)==-1){
+							System.out.println("El nivel no existe");
+							break;
+						}
+					//Id enemy
+					System.out.println("Ingrese el id del enemigo");
+					enemyId=reader.next();
+					//Type enemy
+
+					System.out.println(validation);
+
+						typeEnemy=reader.next();
+
+						while(!typeEnemy.equals("Ogro")&&!typeEnemy.equals("Abstracto")&&!typeEnemy.equals("Jefe")&&!typeEnemy.equals("Magico")){
+							System.out.println("No es un tipo de enemigo");
+							System.out.println(validation);
+							typeEnemy=reader.next();
+						}
+					//Score If enemy win
+					System.out.println("Ingrese el puntaje que le resta el enemigo al jugador si es victorioso");
+
+					while(!reader.hasNextInt()){
+							reader.next();
+							System.out.println("Invalido, el puntaje debe ser un numero entero");
+						}
+					scoreEnemyWin=reader.nextInt();
+					//Score if enemy lose
+					System.out.println("Ingrese el puntaje que le da el enemigo al jugador si es derrotado");
+
+					while(!reader.hasNextInt()){
+							reader.next();
+							System.out.println("Invalido, el puntaje debe ser un numero entero");
+						}
+					scoreEnemyLose=reader.nextInt();
+					//Quanty of enemies
+					System.out.println("Ingrese la cantidad de enemigos que desea anadir");
+					while(!reader.hasNextInt()){
+							reader.next();
+							System.out.println("Invalido, la cantidad es un numero entero");
+						}
+					quantyOfEnemy=reader.nextInt();
+
+					//Posicion X
+					System.out.println("Ingrese la posicion X");
+						while(!reader.hasNextInt()){
+							reader.next();
+							System.out.println("Invalido, las posiciones son numeros enteros");
+						}
+					enemyPositionX=reader.nextInt();
+
+					//Posicion Y
+					System.out.println("Ingrese la posicion Y");
+						while(!reader.hasNextInt()){
+							reader.next();
+							System.out.println("Invalido, las posiciones son numeros enteros");
+						}
+					enemyPositionY=reader.nextInt();
+
+					msj=videogame.addEnemyToLevel(numberLevel, enemyId, typeEnemy, scoreEnemyWin, scoreEnemyLose, quantyOfEnemy, enemyPositionX, enemyPositionY);
+					System.out.println(msj);
 					break;
 
 
