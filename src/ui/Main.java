@@ -43,7 +43,8 @@ public class Main{
 			"1.Create a player \n" +
 			"2.Anadir un nivel\n"+
 			"3.Anadir un tesoro a un nivel \n"+
-			"4.Anadir un enemigo a un nivel";  
+			"4.Anadir un enemigo a un nivel\n"+
+			"5.Modificar el puntaje de un jugador";  
 	}
 	// this method executes the option
 	public void executeOption(int option){
@@ -71,9 +72,11 @@ public class Main{
 			int quantyOfEnemy=0;
 			int enemyPositionX=0;
 			int enemyPositionY=0;
-
+			int newScorePlayer=0;	
 			switch(option){
 				case 1: 
+					System.out.println("Aclaracion!!!!\n"+
+										"Los jugadores cuando son creados cuentan con 5 vidas y un puntaje de 10\n");
 					System.out.println("Digite el Id del player");
 					idPlayer=reader.next();
 					System.out.println("Digite el name del player");
@@ -234,7 +237,22 @@ public class Main{
 					msj=videogame.addEnemyToLevel(numberLevel, enemyId, typeEnemy, scoreEnemyWin, scoreEnemyLose, quantyOfEnemy, enemyPositionX, enemyPositionY);
 					System.out.println(msj);
 					break;
-
+				case 5:
+					System.out.println("Digite el nombre del jugador el cual desea modificarle el puntaje");
+					namePlayer=reader.next();
+					if(videogame.validateIfPlayerExist(namePlayer)==-1){
+							System.out.println("El jugador no existe");
+							break;
+						}
+					System.out.println("Ingrese el nuevo puntaje del jugador");
+					while(!reader.hasNextInt()){
+						reader.next();
+						System.out.println("El nuevo puntaje debe ser un numero entero");
+					}	
+					newScorePlayer=reader.nextInt();
+					msj=videogame.setPlayerScore(namePlayer,newScorePlayer);
+					System.out.println(msj);
+					break;
 
 				case 0: 
 					System.out.println("Exit program.");

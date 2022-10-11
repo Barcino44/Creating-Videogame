@@ -57,6 +57,19 @@ public class Videogame {
 		}
 		return pos;
 	}
+	public int validateIfPlayerExist(String namePlayer){
+		int pos=-1;
+		boolean playerExist=false;
+		for(int i=0; i<PLAYERS_SIZE&&!playerExist; i++){
+			if(players[i]!=null){
+				if(players[i].getName().equals(namePlayer)){
+					pos=i;
+					playerExist=true;
+				}
+			}
+		}
+		return pos;
+	}
 	public String addTreasureToLevel(int numberLevel, String name, String url, int score, int quantyOfTresaure, int positionX, int positionY){
 		String msj="No se ha podido anadir el tesoro";
 		Treasure newTreasure = new Treasure(name, url, score, quantyOfTresaure, positionX, positionY);
@@ -75,6 +88,14 @@ public class Videogame {
 			msj=levels[numberOfLevel].addEnemyWithObject(newEnemy)+levels[numberOfLevel].getNumber();
 	
 		}
+		return msj;
+	}
+	public String setPlayerScore(String namePlayer, int newScorePlayer){
+		String msj="";
+		int posPlayer=validateIfPlayerExist(namePlayer);
+		int actualScore=players[posPlayer].getScore();
+		players[posPlayer].setScore(actualScore+newScorePlayer);
+		msj="El jugador "+players[posPlayer].getName()+" tiene un nuevo puntaje de "+players[posPlayer].getScore();
 		return msj;
 	}
 }
