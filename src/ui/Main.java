@@ -44,7 +44,8 @@ public class Main{
 			"2.Anadir un nivel\n"+
 			"3.Anadir un tesoro a un nivel \n"+
 			"4.Anadir un enemigo a un nivel\n"+
-			"5.Modificar el puntaje de un jugador";  
+			"5.Modificar el puntaje de un jugador\n"+
+			"6.Incrementar el nivel de un jugador";  
 	}
 	// this method executes the option
 	public void executeOption(int option){
@@ -60,13 +61,13 @@ public class Main{
 			int treasurePositionX=0;
 			int treasurePositionY=0;
 			String enemyId="";
-			String typeEnemy="";
+			int typeEnemy=0;
 			String validation=("Ingrese el tipo de enemigo a anadir\n"+
 									  "Los posibles tipos de enemigos son:\n"+
-									  "Ogro\n"+
-									  "Abstracto\n"+
-									  "Jefe\n"+
-									  "Magico");
+									  "1. Ogro\n"+
+									  "2. Abstracto\n"+
+									  "3. Jefe\n"+
+									  "4. Magico");
 			int scoreEnemyWin=0;
 			int scoreEnemyLose=0;
 			int quantyOfEnemy=0;
@@ -76,7 +77,7 @@ public class Main{
 			switch(option){
 				case 1: 
 					System.out.println("Aclaracion!!!!\n"+
-										"Los jugadores cuando son creados cuentan con 5 vidas y un puntaje de 10\n");
+										"Los jugadores cuando son creados cuentan con 5 vidas, un puntaje de 10 y se encuentran en el nivel 1");
 					System.out.println("Digite el Id del player");
 					idPlayer=reader.next();
 					System.out.println("Digite el name del player");
@@ -86,6 +87,7 @@ public class Main{
 					break; 
 
 				case 2: 
+					System.out.println("Los niveles 1-10 ya se encuentran inicializados");
 					System.out.println("Digite el numero del nivel que desea anadir");
 					while(!reader.hasNextInt()){
 						reader.next();
@@ -187,12 +189,22 @@ public class Main{
 
 					System.out.println(validation);
 
-						typeEnemy=reader.next();
+						while(!reader.hasNextInt()){
+							reader.next();
+							System.out.println("Invalido, digite el numero que le corresponde al enemigo de nivel");
+							System.out.println(validation);
+						}
+						typeEnemy=reader.nextInt();
 
-						while(!typeEnemy.equals("Ogro")&&!typeEnemy.equals("Abstracto")&&!typeEnemy.equals("Jefe")&&!typeEnemy.equals("Magico")){
+						while(typeEnemy!=1&&typeEnemy!=2&&typeEnemy!=3&&typeEnemy!=4){
 							System.out.println("No es un tipo de enemigo");
 							System.out.println(validation);
-							typeEnemy=reader.next();
+							typeEnemy=reader.nextInt();
+						}
+
+						if(videogame.validateIfEnemyExist(numberLevel, typeEnemy)==true){
+							System.out.println("El enemigo ya existe, no se puede anadir");
+							break;
 						}
 					//Score If enemy win
 					System.out.println("Ingrese el puntaje que le resta el enemigo al jugador si es victorioso");
@@ -210,13 +222,6 @@ public class Main{
 							System.out.println("Invalido, el puntaje debe ser un numero entero");
 						}
 					scoreEnemyLose=reader.nextInt();
-					//Quanty of enemies
-					System.out.println("Ingrese la cantidad de enemigos que desea anadir");
-					while(!reader.hasNextInt()){
-							reader.next();
-							System.out.println("Invalido, la cantidad es un numero entero");
-						}
-					quantyOfEnemy=reader.nextInt();
 
 					//Posicion X
 					System.out.println("Ingrese la posicion X");
@@ -234,7 +239,7 @@ public class Main{
 						}
 					enemyPositionY=reader.nextInt();
 
-					msj=videogame.addEnemyToLevel(numberLevel, enemyId, typeEnemy, scoreEnemyWin, scoreEnemyLose, quantyOfEnemy, enemyPositionX, enemyPositionY);
+					msj=videogame.addEnemyToLevel(numberLevel, enemyId, typeEnemy, scoreEnemyWin, scoreEnemyLose, enemyPositionX, enemyPositionY);
 					System.out.println(msj);
 					break;
 				case 5:
@@ -253,7 +258,17 @@ public class Main{
 					msj=videogame.setPlayerScore(namePlayer,newScorePlayer);
 					System.out.println(msj);
 					break;
+				case 6:
+					System.out.println("Digite el nombre del jugador el cual desea modificarle el nivel");
+					namePlayer=reader.next();
+					if(videogame.validateIfPlayerExist(namePlayer)==-1){
+							System.out.println("El jugador no existe");
+							break;
+						}
 
+					msj=videogame.levelUpPlayer(namePlayer);
+					System.out.println(msj);	
+					break;
 				case 0: 
 					System.out.println("Exit program.");
 					break; 

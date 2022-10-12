@@ -3,21 +3,21 @@ package model;
 public class Enemy {
 
 	private String id;
-	private String type;
+	private int selectionType;
 	private int scoreWin;
 	private int scoreLose;
-	private int quantyOfEnemy;
 	private int positionX;
 	private int positionY;
+	private TypeEnemy typeEnemy;
 	
-	public Enemy(String id, String type, int scoreWin, int scoreLose, int quantyOfEnemy, int positionX, int positionY) {
+	public Enemy(String id, int selectionType, int scoreWin, int scoreLose, int positionX, int positionY) {
 		this.id = id;
-		this.type = type;
+		this.selectionType = selectionType;
 		this.scoreWin = scoreWin;
 		this.scoreLose = scoreLose;
-		this.quantyOfEnemy=quantyOfEnemy;
 		this.positionX=positionX;
 		this.positionY=positionY;
+		setTypeEnemy();
 	}
 	public String getId() {
 		return id;
@@ -25,11 +25,22 @@ public class Enemy {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getType() {
-		return type;
+	public int selectionType() {
+		return selectionType;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setTypeEnemy(){
+		if(selectionType==1){
+		typeEnemy=TypeEnemy.OGRE;
+		}	
+		else if (selectionType==2){
+		typeEnemy=TypeEnemy.ABSTRACT;		
+		}
+		else if (selectionType==3){
+		typeEnemy=TypeEnemy.BOSS;
+		}
+		else if(selectionType==4){
+		typeEnemy=TypeEnemy.MAGICIAN;
+		}
 	}
 	public int getScoreWin() {
 		return scoreWin;
@@ -42,12 +53,6 @@ public class Enemy {
 	}
 	public void setScoreLose(int scoreLose){
 		this.scoreLose = scoreLose; 
-	}
-	public int getQuantyOfEnemy() {
-		return quantyOfEnemy;
-	}
-	public void setQuantyOfEnemy(int quantyOfEnemy){
-		this.quantyOfEnemy = quantyOfEnemy; 
 	}
 	public int getPositionX() {
 		return positionX;

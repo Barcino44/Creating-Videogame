@@ -4,12 +4,14 @@ public class Player{
 	private String name;
 	private int score;
 	private int lives;
+	private int level;
 	
-	public Player(String id, String name, int score, int lives) {
+	public Player(String id, String name, int score, int lives, int level) {
 		this.id = id;
 		this.name = name;
 		this.score = score;
 		this.lives = lives;
+		this.level = level;
 	}
 	
 
@@ -36,5 +38,11 @@ public class Player{
 	}
 	public void setLives(int lives){
 		this.lives = lives; 
+	}
+	public int getLevel() {
+		return level; 
+	}
+	public void setLevel(int level){
+		this.level = level;
 	}
 }
