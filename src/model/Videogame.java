@@ -91,10 +91,10 @@ public class Videogame {
 		}
 		return msj;
 	}
-	public boolean validateIfEnemyExist(int numberLevel, int type){
+	public boolean validateIfEnemyExist(int numberLevel, int selectionType){
 		int numberOfLevel=validateIfLevelExist(numberLevel);
 		boolean enemyExist=false;
-		if(levels[numberLevel].validateIfEnemyAlreadyExist(type)==true){
+		if(levels[numberLevel].validateIfEnemyAlreadyExist(selectionType)==true){
 			enemyExist=true;
 		}
 		return enemyExist;
@@ -110,7 +110,7 @@ public class Videogame {
 		String msj="";
 		int posPlayer=validateIfPlayerExist(namePlayer);
 		int actualScore=players[posPlayer].getScore();
-		players[posPlayer].setScore(actualScore+newScorePlayer);
+		players[posPlayer].setScore(newScorePlayer);
 		msj="El jugador "+players[posPlayer].getName()+" tiene un nuevo puntaje de "+players[posPlayer].getScore();
 		return msj;
 	}
@@ -146,7 +146,18 @@ public class Videogame {
 					}
 		return msj;
 	}
-	public String showLevelInfo(numberLevel){
-		
+	public String showLevelInfo(int numberLevel){
+		String msj="";
+		boolean isFound=false;
+		for(int i=0; i<LEVELS_SIZE&&!isFound;i++){
+			if(levels[i]!=null){
+				if(levels[i].getNumber()==numberLevel){
+					isFound=true;
+					msj=levels[i].showLevelInfo()+levels[i].showOnlyEnemy()+levels[i].showOnlyTreasures()+"\n"+
+						"Fueron encontrados en el nivel " +levels[i].getNumber();
+				}	
+			}	
+		}
+		return msj;
 	}
 }

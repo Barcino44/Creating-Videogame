@@ -13,6 +13,8 @@ public class Level {
 		enemies = new Enemy[ENEMY_SIZE];
 		enemies[1]=new Enemy("21345",1,200,300,45,200);
 		treasures = new Treasure[TREASURE_SIZE];
+		treasures[1]=new Treasure("Diamond","www.Diamond.com", 500,200,502,280);
+		treasures[2]=new Treasure("Gold","www.Gold.Com,",300,500,680,200);
 		this.number= number;
 		this.requiredScoreToPassLevel=requiredScoreToPassLevel;
 	}
@@ -31,7 +33,7 @@ public class Level {
 	public String addTreasureWithObject(Treasure treasure){
 		String msj="No se ha podido anadir el tesoro";
 		boolean isEmpty=false;
-		for(int i = 0; i <TREASURE_SIZE && !isEmpty; i++){
+		for(int i = 1; i <TREASURE_SIZE && !isEmpty; i++){
 			if(treasures[i] == null){
 				treasures[i] = treasure; 
 				isEmpty = true; 
@@ -56,20 +58,44 @@ public class Level {
 		boolean enemyExist=false;
 		for (int i=1;i<ENEMY_SIZE&&!enemyExist;i++) {
 			if(enemies[i]!=null){
-				if(selectionTypeEnemy==enemies[i].selectionType());
+				if(selectionTypeEnemy==enemies[i].getselectionType()){
 					enemyExist=true;
 				}
+			}
 		}
 	return enemyExist;
 	}
-	public showLevelInfo(){
-	int i=0;
-		for (i=1;i<ENEMY_SIZE;i++) {
-			for(i=1;i<TREASURE_SIZE;i++)
+	public String showLevelInfo(){
+		String msj="";
+		for (int i=1;i<ENEMY_SIZE;i++) {
+			for(i=1;i<TREASURE_SIZE;i++){
 				if(enemies[i]!=null&&treasures[i]!=null){
-					msj="Un enemigo "
-
+					msj= msj+"\n"+ "Un enemigo " + enemies[i].getTypeEnemy()+","+" Un tesoro " + treasures[i].getName();
+				}
 			}
 		}
+	return msj;
 	}
-}
+	public String showOnlyEnemy(){
+		String msj="";
+		for (int i=1;i<ENEMY_SIZE;i++) {
+			for(i=1;i<TREASURE_SIZE;i++){
+				if(enemies[i]!=null&&treasures[i]==null){
+					msj= msj+"\n"+ "Un enemigo " + enemies[i].getTypeEnemy();
+				}
+			}
+		}
+		return msj;
+	}
+	public String showOnlyTreasures(){
+		String msj="";
+		for (int i=1;i<ENEMY_SIZE;i++) {
+			for(i=1;i<TREASURE_SIZE;i++){
+				if(enemies[i]==null&&treasures[i]!=null){
+					msj= msj+"\n"+ "Un tesoro " + treasures[i].getName();
+				}
+			}
+		}
+		return msj;
+	}
+}	

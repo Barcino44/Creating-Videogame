@@ -25,7 +25,7 @@ public class Enemy {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int selectionType() {
+	public int getselectionType() {
 		return selectionType;
 	}
 	public void setTypeEnemy(){
@@ -41,6 +41,9 @@ public class Enemy {
 		else if(selectionType==4){
 		typeEnemy=TypeEnemy.MAGICIAN;
 		}
+	}
+	public TypeEnemy getTypeEnemy(){
+		return typeEnemy;
 	}
 	public int getScoreWin() {
 		return scoreWin;

@@ -45,7 +45,9 @@ public class Main{
 			"3.Anadir un tesoro a un nivel \n"+
 			"4.Anadir un enemigo a un nivel\n"+
 			"5.Modificar el puntaje de un jugador\n"+
-			"6.Incrementar el nivel de un jugador";  
+			"6.Incrementar el nivel de un jugador\n"+
+			"7.Mostrar los enemigos y tesoros presentes en un nivel\n"+
+			"8.Mostrar los tesoros a partir de un nombre";  
 	}
 	// this method executes the option
 	public void executeOption(int option){
@@ -88,6 +90,7 @@ public class Main{
 
 				case 2: 
 					System.out.println("Los niveles 1-10 ya se encuentran inicializados");
+					System.out.println("Tanto los niveles inicializados como los que se anadan tienen un enemigo Ogro y dos tesoros");
 					System.out.println("Digite el numero del nivel que desea anadir");
 					while(!reader.hasNextInt()){
 						reader.next();
@@ -269,6 +272,16 @@ public class Main{
 					msj=videogame.levelUpPlayer(namePlayer);
 					System.out.println(msj);	
 					break;
+				case 7:
+					System.out.println("Digite el nombre del nivel del cual desea consultar la informacion");
+					while(!reader.hasNextInt()){
+						reader.next();
+						System.out.println("Inserte un numero de nivel valido");
+					}	
+					numberLevel=reader.nextInt();
+					msj=videogame.showLevelInfo(numberLevel);
+					System.out.println(msj);
+					break;
 				case 0: 
 					System.out.println("Exit program.");
 					break; 
@@ -280,7 +293,7 @@ public class Main{
 	}
 
 	public void initVideogame(){
-		System.out.println("Bienvenido a la tienda, digite su nombre");
+		System.out.println("Bienvenido Barcino's Game digite su nombre");
 		String name = reader.nextLine(); 
 		this.videogame = new Videogame(name);
 
