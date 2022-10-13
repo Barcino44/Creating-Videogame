@@ -1,8 +1,8 @@
 package model;
 public class Level {
 
-	public static final int ENEMY_SIZE = 20; 
-	public static final int TREASURE_SIZE = 20; 
+	public static final int ENEMY_SIZE = 50; 
+	public static final int TREASURE_SIZE = 50; 
 
 	private Enemy[] enemies; 
 	private Treasure[] treasures;
@@ -11,10 +11,14 @@ public class Level {
 	
 	public Level(int number, int requiredScoreToPassLevel) {
 		enemies = new Enemy[ENEMY_SIZE];
-		enemies[1]=new Enemy("21345",1,200,300,45,200);
+		enemies[1]=new Enemy("Oriux",1,200,300,45,200);
+		enemies[2]=new Enemy("Hayassu",2,300,456,54,45);
+		enemies[3]=new Enemy("Skarlet",3,450,654,56,84);
+		enemies[4]=new Enemy("Chaser",4,500,640,84,68);
 		treasures = new Treasure[TREASURE_SIZE];
-		treasures[1]=new Treasure("Diamond","www.Diamond.com", 500,200,502,280);
-		treasures[2]=new Treasure("Gold","www.Gold.Com,",300,500,680,200);
+		treasures[1]=new Treasure("Diamond","www.Diamond.com", 500,1,502,280);
+		treasures[2]=new Treasure("Gold","www.Gold.Com",300,1,680,200);
+		treasures[3]=new Treasure("Plate", "www.Plate.com", 60,1,250,45);
 		this.number= number;
 		this.requiredScoreToPassLevel=requiredScoreToPassLevel;
 	}
@@ -54,23 +58,34 @@ public class Level {
 		}
 		return msj;
 	}
-	public boolean validateIfEnemyAlreadyExist(int selectionTypeEnemy){
+	public boolean validateIfEnemyAlreadyExist(String idEnemy){
 		boolean enemyExist=false;
 		for (int i=1;i<ENEMY_SIZE&&!enemyExist;i++) {
 			if(enemies[i]!=null){
-				if(selectionTypeEnemy==enemies[i].getselectionType()){
+				if(enemies[i].getId().equals(idEnemy)){
 					enemyExist=true;
 				}
 			}
 		}
 	return enemyExist;
 	}
+	public boolean validateIfTreasureExist(String treasureName){
+		boolean treasureExist=false;
+		for (int i=1;i<TREASURE_SIZE&&!treasureExist;i++) {
+			if(treasures[i]!=null){
+				if(treasures[i].getName().equals(treasureName)){
+					treasureExist=true;
+				}
+			}
+		}
+	return treasureExist;
+	}
 	public String showLevelInfo(){
 		String msj="";
-		for (int i=1;i<ENEMY_SIZE;i++) {
-			for(i=1;i<TREASURE_SIZE;i++){
+		for(int i=1;i<TREASURE_SIZE;i++){
+			for (i=1;i<ENEMY_SIZE;i++) {
 				if(enemies[i]!=null&&treasures[i]!=null){
-					msj= msj+"\n"+ "Un enemigo " + enemies[i].getTypeEnemy()+","+" Un tesoro " + treasures[i].getName();
+					msj= msj+"\n"+ "Un enemigo " + enemies[i].getTypeEnemy()+","+ treasures[i].getQuantyOfTreasure()+ " tesoro(s) " + treasures[i].getName();
 				}
 			}
 		}
@@ -78,8 +93,8 @@ public class Level {
 	}
 	public String showOnlyEnemy(){
 		String msj="";
-		for (int i=1;i<ENEMY_SIZE;i++) {
-			for(i=1;i<TREASURE_SIZE;i++){
+		for(int i=1;i<TREASURE_SIZE;i++){
+			for (i=1;i<ENEMY_SIZE;i++) {
 				if(enemies[i]!=null&&treasures[i]==null){
 					msj= msj+"\n"+ "Un enemigo " + enemies[i].getTypeEnemy();
 				}
@@ -89,13 +104,24 @@ public class Level {
 	}
 	public String showOnlyTreasures(){
 		String msj="";
-		for (int i=1;i<ENEMY_SIZE;i++) {
-			for(i=1;i<TREASURE_SIZE;i++){
+		for(int i=1;i<TREASURE_SIZE;i++){
+			for (i=1;i<ENEMY_SIZE;i++) {
 				if(enemies[i]==null&&treasures[i]!=null){
 					msj= msj+"\n"+ "Un tesoro " + treasures[i].getName();
 				}
 			}
 		}
 		return msj;
+	}
+	public int countTreasureByName(String treasureName){
+		int count=0;
+		for(int i=1;i<TREASURE_SIZE;i++){
+			if(treasures[i]!=null){
+				if(treasures[i].getName().equals(treasureName)){
+				count=count+treasures[i].getQuantyOfTreasure();
+				}
+			}
+		}
+		return count;
 	}
 }	

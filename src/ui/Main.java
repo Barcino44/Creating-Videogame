@@ -47,7 +47,7 @@ public class Main{
 			"5.Modificar el puntaje de un jugador\n"+
 			"6.Incrementar el nivel de un jugador\n"+
 			"7.Mostrar los enemigos y tesoros presentes en un nivel\n"+
-			"8.Mostrar los tesoros a partir de un nombre";  
+			"8.Mostrar la cantidad de tesoros a partir de un nombre";  
 	}
 	// this method executes the option
 	public void executeOption(int option){
@@ -60,8 +60,6 @@ public class Main{
 			String treasureUrl="";
 			int treasureScore=0;
 			int quantyOfTreasure=0;
-			int treasurePositionX=0;
-			int treasurePositionY=0;
 			String enemyId="";
 			int typeEnemy=0;
 			String validation=("Ingrese el tipo de enemigo a anadir\n"+
@@ -73,8 +71,6 @@ public class Main{
 			int scoreEnemyWin=0;
 			int scoreEnemyLose=0;
 			int quantyOfEnemy=0;
-			int enemyPositionX=0;
-			int enemyPositionY=0;
 			int newScorePlayer=0;	
 			switch(option){
 				case 1: 
@@ -84,13 +80,18 @@ public class Main{
 					idPlayer=reader.next();
 					System.out.println("Digite el name del player");
 					namePlayer=reader.next();
-					msj=videogame.addPlayer(idPlayer, namePlayer);
+					if(videogame.validateIfPlayerExist(namePlayer)!=-1){
+							System.out.println("El jugador ya existe");
+						}
+					else{
+						msj=videogame.addPlayer(idPlayer, namePlayer);
 					System.out.println(msj);
+					}
 					break; 
 
 				case 2: 
 					System.out.println("Los niveles 1-10 ya se encuentran inicializados");
-					System.out.println("Tanto los niveles inicializados como los que se anadan tienen un enemigo Ogro y dos tesoros");
+					System.out.println("Tanto los niveles inicializados como los que se anadan tienen 4 tipos distintos de enemigos y 3 tesoros");
 					System.out.println("Digite el numero del nivel que desea anadir");
 					while(!reader.hasNextInt()){
 						reader.next();
@@ -100,16 +101,17 @@ public class Main{
 
 					if(videogame.validateIfLevelExist(numberLevel)!=-1){
 							System.out.println("El nivel ya existe");
-							break;
-						}
-					System.out.println("Digite el puntaje requerido para pasarlo");
-					while(!reader.hasNextInt()){
-						reader.next();
-						System.out.println("Invalido, digite un numero de nivel");
 					}
+					else{
+					System.out.println("Digite el puntaje requerido para pasarlo");
+						while(!reader.hasNextInt()){
+							reader.next();
+							System.out.println("Invalido, digite un numero de nivel");
+						}
 					requiredScoreToPassLevel=reader.nextInt();
 					msj=videogame.addLevel(numberLevel, requiredScoreToPassLevel);
 					System.out.println(msj);
+					}
 					break; 
 
 				case 3:
@@ -123,9 +125,8 @@ public class Main{
 
 					if(videogame.validateIfLevelExist(numberLevel)==-1){
 							System.out.println("El nivel no existe");
-							break;
-						}
-
+					}
+					else{
 					//Nombre del tesoro
 					System.out.println("Ingrese el nombre del tesoro");
 					treasureName=reader.next();
@@ -144,31 +145,16 @@ public class Main{
 					treasureScore= reader.nextInt();
 
 					//Cantidad de tesoro
-					System.out.println("Ingrese el puntaje que brinda la cantidad del tesoro que desea anadir");
+					System.out.println("Ingrese la cantidad del tesoro que desea anadir");
 						while(!reader.hasNextInt()){
 							reader.next();
 							System.out.println("Invalido, digite una cantidad valida");
 						}
 					quantyOfTreasure=reader.nextInt();
-
-					//Posicion X
-					System.out.println("Ingrese la posicion X");
-						while(!reader.hasNextInt()){
-							reader.next();
-							System.out.println("Invalido, las posiciones son numeros enteros");
-						}
-					treasurePositionX=reader.nextInt();
-
-					//Posicion Y
-					System.out.println("Ingrese la posicion Y");
-						while(!reader.hasNextInt()){
-							reader.next();
-							System.out.println("Invalido, las posiciones son numeros enteros");
-						}
-					treasurePositionY=reader.nextInt();
 					//Confirmation
-					msj=videogame.addTreasureToLevel(numberLevel, treasureName, treasureUrl, treasureScore, quantyOfTreasure, treasurePositionX, treasurePositionY);
+					msj=videogame.addTreasureToLevel(numberLevel, treasureName, treasureUrl, treasureScore, quantyOfTreasure);
 					System.out.println(msj);
+					}
 
 					break;
 					
@@ -183,18 +169,21 @@ public class Main{
 
 					if(videogame.validateIfLevelExist(numberLevel)==-1){
 							System.out.println("El nivel no existe");
-							break;
 						}
+					else if(videogame.validateIfLevelExist(numberLevel)!=-1){
 					//Id enemy
 					System.out.println("Ingrese el id del enemigo");
 					enemyId=reader.next();
+						if(videogame.validateIfEnemyExist(numberLevel, enemyId)==true){
+							System.out.println("El enemigo ya existe, no se puede anadir");
+							}
 					//Type enemy
-
+					else{
 					System.out.println(validation);
 
 						while(!reader.hasNextInt()){
 							reader.next();
-							System.out.println("Invalido, digite el numero que le corresponde al enemigo de nivel");
+							System.out.println("Invalido, digite el numero que le corresponde a algun tipo de enemigo");
 							System.out.println(validation);
 						}
 						typeEnemy=reader.nextInt();
@@ -205,10 +194,6 @@ public class Main{
 							typeEnemy=reader.nextInt();
 						}
 
-						if(videogame.validateIfEnemyExist(numberLevel, typeEnemy)==true){
-							System.out.println("El enemigo ya existe, no se puede anadir");
-							break;
-						}
 					//Score If enemy win
 					System.out.println("Ingrese el puntaje que le resta el enemigo al jugador si es victorioso");
 
@@ -225,33 +210,18 @@ public class Main{
 							System.out.println("Invalido, el puntaje debe ser un numero entero");
 						}
 					scoreEnemyLose=reader.nextInt();
-
-					//Posicion X
-					System.out.println("Ingrese la posicion X");
-						while(!reader.hasNextInt()){
-							reader.next();
-							System.out.println("Invalido, las posiciones son numeros enteros");
-						}
-					enemyPositionX=reader.nextInt();
-
-					//Posicion Y
-					System.out.println("Ingrese la posicion Y");
-						while(!reader.hasNextInt()){
-							reader.next();
-							System.out.println("Invalido, las posiciones son numeros enteros");
-						}
-					enemyPositionY=reader.nextInt();
-
-					msj=videogame.addEnemyToLevel(numberLevel, enemyId, typeEnemy, scoreEnemyWin, scoreEnemyLose, enemyPositionX, enemyPositionY);
+					msj=videogame.addEnemyToLevel(numberLevel, enemyId, typeEnemy, scoreEnemyWin, scoreEnemyLose);
 					System.out.println(msj);
+					}
+				}
 					break;
 				case 5:
 					System.out.println("Digite el nombre del jugador el cual desea modificarle el puntaje");
 					namePlayer=reader.next();
 					if(videogame.validateIfPlayerExist(namePlayer)==-1){
 							System.out.println("El jugador no existe");
-							break;
 						}
+					else{
 					System.out.println("Ingrese el nuevo puntaje del jugador");
 					while(!reader.hasNextInt()){
 						reader.next();
@@ -260,17 +230,18 @@ public class Main{
 					newScorePlayer=reader.nextInt();
 					msj=videogame.setPlayerScore(namePlayer,newScorePlayer);
 					System.out.println(msj);
+					}
 					break;
 				case 6:
 					System.out.println("Digite el nombre del jugador el cual desea modificarle el nivel");
 					namePlayer=reader.next();
 					if(videogame.validateIfPlayerExist(namePlayer)==-1){
 							System.out.println("El jugador no existe");
-							break;
 						}
-
+					else{
 					msj=videogame.levelUpPlayer(namePlayer);
-					System.out.println(msj);	
+					System.out.println(msj);
+					}	
 					break;
 				case 7:
 					System.out.println("Digite el nombre del nivel del cual desea consultar la informacion");
@@ -282,6 +253,33 @@ public class Main{
 					msj=videogame.showLevelInfo(numberLevel);
 					System.out.println(msj);
 					break;
+				case 8:
+					System.out.println("Digite el nombre del tesoro que desea buscar");
+					treasureName=reader.next();
+					if (videogame.validateIfTreasureExist(treasureName)!=true){
+						System.out.println("El tesoro no existe");
+					}
+					else{
+						msj=videogame.countTreasureInGame(treasureName);
+						System.out.println(msj);
+					}
+					break;
+				case 9:
+					System.out.println("Digite el numero del enemigo que desea buscar");
+					System.out.println(validation);
+
+						while(!reader.hasNextInt()){
+							reader.next();
+							System.out.println("Invalido, digite el numero que le corresponde a algun tipo de enemigo");
+							System.out.println(validation);
+						}
+						typeEnemy=reader.nextInt();
+
+						while(typeEnemy!=1&&typeEnemy!=2&&typeEnemy!=3&&typeEnemy!=4){
+							System.out.println("No es un tipo de enemigo");
+							System.out.println(validation);
+							typeEnemy=reader.nextInt();
+						}
 				case 0: 
 					System.out.println("Exit program.");
 					break; 

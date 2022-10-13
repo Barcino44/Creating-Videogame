@@ -1,4 +1,5 @@
 package model;
+import java.lang.Math;
 public class Videogame {
 
 	public static final int PLAYERS_SIZE = 20; 
@@ -6,9 +7,14 @@ public class Videogame {
 
 	private Player[] players; 
 	private Level[] levels;
+	private Enemy[] enemies;
+	private Treasure[] treasures;
 	
 	public Videogame(String nit) {
-		players = new Player[PLAYERS_SIZE]; 
+		players = new Player[PLAYERS_SIZE];
+		players[1]=new Player("461556","ElSuperMegaPro",10,5,1);
+		players[2]=new Player("676568","EsoEsUnaFalacia",10,5,1);
+		players[3]=new Player("648636","ExtremePlayer",10,5,1);
 		levels = new Level[LEVELS_SIZE];
 		levels[1]=new Level(1,10);
 		levels[2]=new Level(2,20);
@@ -81,8 +87,10 @@ public class Videogame {
 		}
 		return pos;
 	}
-	public String addTreasureToLevel(int numberLevel, String name, String url, int score, int quantyOfTresaure, int positionX, int positionY){
+	public String addTreasureToLevel(int numberLevel, String name, String url, int score, int quantyOfTresaure){
 		String msj="No se ha podido anadir el tesoro";
+		int positionX=(int)Math.random()*1281;
+		int positionY=(int)Math.random()*721;
 		Treasure newTreasure = new Treasure(name, url, score, quantyOfTresaure, positionX, positionY);
 		int numberOfLevel=validateIfLevelExist(numberLevel);
 		if(numberOfLevel!=-1){
@@ -91,16 +99,29 @@ public class Videogame {
 		}
 		return msj;
 	}
-	public boolean validateIfEnemyExist(int numberLevel, int selectionType){
+	public boolean validateIfEnemyExist(int numberLevel, String enemyId){
 		int numberOfLevel=validateIfLevelExist(numberLevel);
 		boolean enemyExist=false;
-		if(levels[numberLevel].validateIfEnemyAlreadyExist(selectionType)==true){
+		if(levels[numberLevel].validateIfEnemyAlreadyExist(enemyId)==true){
 			enemyExist=true;
 		}
 		return enemyExist;
 	}
-	public String addEnemyToLevel(int numberLevel, String id, int type, int scoreWin, int scoreLose, int positionX, int positionY){
+	public boolean validateIfTreasureExist(String treasureName){
+		boolean treasureExist=false;
+		for(int i=1;i<LEVELS_SIZE; i++) {
+			if(levels[i]!=null){
+				if(levels[i].validateIfTreasureExist(treasureName)==true){
+				treasureExist=true;
+				}
+			}
+		}
+		return treasureExist;
+	}
+	public String addEnemyToLevel(int numberLevel, String id, int type, int scoreWin, int scoreLose){
 		String msj="No se ha podido anadir el enemigo";
+		int positionX=(int)Math.random()*1281;
+		int positionY=(int)Math.random()*721;
 		Enemy newEnemy = new Enemy(id, type, scoreWin, scoreLose, positionX, positionY);
 		int numberOfLevel=validateIfLevelExist(numberLevel);
 		msj=levels[numberOfLevel].addEnemyWithObject(newEnemy)+levels[numberOfLevel].getNumber();
@@ -149,7 +170,7 @@ public class Videogame {
 	public String showLevelInfo(int numberLevel){
 		String msj="";
 		boolean isFound=false;
-		for(int i=0; i<LEVELS_SIZE&&!isFound;i++){
+		for(int i=1; i<LEVELS_SIZE&&!isFound;i++){
 			if(levels[i]!=null){
 				if(levels[i].getNumber()==numberLevel){
 					isFound=true;
@@ -159,5 +180,18 @@ public class Videogame {
 			}	
 		}
 		return msj;
+	}
+	public String countTreasureInGame(String treasureName){
+		int count=0;
+		String msj="";
+		for(int i=1; i<LEVELS_SIZE;i++){
+			if(levels[i]!=null){
+				if(levels[i].countTreasureByName(treasureName)!=0){
+					count=count+levels[i].countTreasureByName(treasureName);
+					msj="Existe(n) " + count + " tesoro(s) " + treasureName + " en todo el juego";
+				}
+			}
+		}
+	return msj;
 	}
 }
