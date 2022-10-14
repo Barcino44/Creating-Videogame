@@ -1,8 +1,8 @@
 package model;
 public class Level {
 
-	public static final int ENEMY_SIZE = 50; 
-	public static final int TREASURE_SIZE = 50; 
+	public static final int ENEMY_SIZE = 20; 
+	public static final int TREASURE_SIZE = 20; 
 
 	private Enemy[] enemies; 
 	private Treasure[] treasures;
@@ -85,7 +85,7 @@ public class Level {
 		for(int i=1;i<TREASURE_SIZE;i++){
 			for (i=1;i<ENEMY_SIZE;i++) {
 				if(enemies[i]!=null&&treasures[i]!=null){
-					msj= msj+"\n"+ "Un enemigo " + enemies[i].getTypeEnemy()+","+ treasures[i].getQuantyOfTreasure()+ " tesoro(s) " + treasures[i].getName();
+					msj= msj+"\n"+ "Un enemigo " + enemies[i].getTypeEnemy()+" , "+ treasures[i].getQuantyOfTreasure()+ " tesoro(s) " + treasures[i].getName();
 				}
 			}
 		}
@@ -118,10 +118,57 @@ public class Level {
 		for(int i=1;i<TREASURE_SIZE;i++){
 			if(treasures[i]!=null){
 				if(treasures[i].getName().equals(treasureName)){
-				count=count+treasures[i].getQuantyOfTreasure();
+					count=count+treasures[i].getQuantyOfTreasure();
 				}
 			}
 		}
 		return count;
+	}
+	public int countEnemyByType(int selectionType){
+		int count=0;
+		for(int i=1;i<ENEMY_SIZE;i++){
+			if(enemies[i]!=null){
+				if(enemies[i].getSelectionType()==selectionType){
+					count++;
+				}
+			}
+		}
+	return count;
+	}
+	//public int mostRepeatenTreasure(){
+		//	int maxTreasures=0;
+		//for (int i=1; i<TREASURE_SIZE; i++){
+		//	if(treasures[i]!=null){
+		//		if(treasures[i].getQuantyOfTreasure()>maxTreasures){
+		//			if(treasures[i].getName())
+		//		maxTreasures=treasures[i].getQuantyOfTreasure();
+		//		}
+		//	}
+		//}
+	//return maxTreasures;
+	//}
+	public int showScoreMostValuableEnemy(){
+		int scoreMostValuableEnemy=0;
+		for(int i=1;i<ENEMY_SIZE;i++){
+			if(enemies[i]!=null){
+				if(enemies[i].getScoreLose()>scoreMostValuableEnemy){
+					scoreMostValuableEnemy=enemies[i].getScoreLose();
+				}
+			}
+		}
+		return scoreMostValuableEnemy;
+	}
+	public TypeEnemy showTypeMostValuableEnemy(){
+		TypeEnemy enemyType=null;
+		int scoreMostValuableEnemy=0;
+		for(int i=1;i<ENEMY_SIZE;i++){
+			if(enemies[i]!=null){
+				if(enemies[i].getScoreLose()>scoreMostValuableEnemy){
+					scoreMostValuableEnemy=enemies[i].getScoreLose();
+					enemyType=enemies[i].getTypeEnemy();
+				}
+			}
+		}
+		return enemyType;
 	}
 }	

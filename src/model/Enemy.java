@@ -25,7 +25,7 @@ public class Enemy {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getselectionType() {
+	public int getSelectionType() {
 		return selectionType;
 	}
 	public void setTypeEnemy(){

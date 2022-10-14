@@ -47,7 +47,10 @@ public class Main{
 			"5.Modificar el puntaje de un jugador\n"+
 			"6.Incrementar el nivel de un jugador\n"+
 			"7.Mostrar los enemigos y tesoros presentes en un nivel\n"+
-			"8.Mostrar la cantidad de tesoros a partir de un nombre";  
+			"8.Mostrar la cantidad de tesoros a partir de un nombre\n"+
+			"9.Mostrar la cantidad de enemigos dado un tipo\n"+
+			"10.Mostrar el tesoro mas repetido\n"+
+			"11.Mostrar el enemigo que brinda mas puntaje y el nivel donde se encuentra";  
 	}
 	// this method executes the option
 	public void executeOption(int option){
@@ -62,12 +65,11 @@ public class Main{
 			int quantyOfTreasure=0;
 			String enemyId="";
 			int typeEnemy=0;
-			String validation=("Ingrese el tipo de enemigo a anadir\n"+
-									  "Los posibles tipos de enemigos son:\n"+
-									  "1. Ogro\n"+
-									  "2. Abstracto\n"+
-									  "3. Jefe\n"+
-									  "4. Magico");
+			String validation=("Los posibles tipos de enemigos son:\n"+
+							  "1. Ogro\n"+
+							  "2. Abstracto\n"+
+							  "3. Jefe\n"+
+							  "4. Magico");
 			int scoreEnemyWin=0;
 			int scoreEnemyLose=0;
 			int quantyOfEnemy=0;
@@ -91,7 +93,7 @@ public class Main{
 
 				case 2: 
 					System.out.println("Los niveles 1-10 ya se encuentran inicializados");
-					System.out.println("Tanto los niveles inicializados como los que se anadan tienen 4 tipos distintos de enemigos y 3 tesoros");
+					System.out.println("Tanto los niveles inicializados como los que se anadan tienen 4 tipos distintos de enemigos y 3 distintos tesoros");
 					System.out.println("Digite el numero del nivel que desea anadir");
 					while(!reader.hasNextInt()){
 						reader.next();
@@ -100,7 +102,10 @@ public class Main{
 					numberLevel=reader.nextInt();
 
 					if(videogame.validateIfLevelExist(numberLevel)!=-1){
-							System.out.println("El nivel ya existe");
+						System.out.println("El nivel ya existe");
+					}
+					else if(videogame.levelImposibleToAdd(numberLevel)==true){
+						System.out.println("El nivel no se puede anadir, estas ingresando un numero superior a 20 (nivel maximo que se puede anadir) o un numero negativo");
 					}
 					else{
 					System.out.println("Digite el puntaje requerido para pasarlo");
@@ -179,11 +184,13 @@ public class Main{
 							}
 					//Type enemy
 					else{
+					System.out.println("Digite el numero del enemigo a anadir");
 					System.out.println(validation);
 
 						while(!reader.hasNextInt()){
 							reader.next();
 							System.out.println("Invalido, digite el numero que le corresponde a algun tipo de enemigo");
+							System.out.println("Digite el numero del enemigo a anadir");
 							System.out.println(validation);
 						}
 						typeEnemy=reader.nextInt();
@@ -267,19 +274,29 @@ public class Main{
 				case 9:
 					System.out.println("Digite el numero del enemigo que desea buscar");
 					System.out.println(validation);
-
-						while(!reader.hasNextInt()){
+					while(!reader.hasNextInt()){
 							reader.next();
 							System.out.println("Invalido, digite el numero que le corresponde a algun tipo de enemigo");
 							System.out.println(validation);
-						}
-						typeEnemy=reader.nextInt();
+					}
+					typeEnemy=reader.nextInt();
 
-						while(typeEnemy!=1&&typeEnemy!=2&&typeEnemy!=3&&typeEnemy!=4){
+					while(typeEnemy!=1&&typeEnemy!=2&&typeEnemy!=3&&typeEnemy!=4){
 							System.out.println("No es un tipo de enemigo");
 							System.out.println(validation);
 							typeEnemy=reader.nextInt();
-						}
+					}
+						msj=videogame.countEnemiesInGame(typeEnemy);
+						System.out.println(msj);
+					break;
+				case 10:
+					//msj=videogame.showMostRepeatenTreasure();
+					//System.out.println(msj);
+					break;
+				case 11:
+					msj=videogame.showMostValuableEnemyInGame();
+					System.out.println(msj);
+					break;
 				case 0: 
 					System.out.println("Exit program.");
 					break; 

@@ -2,14 +2,12 @@ package model;
 import java.lang.Math;
 public class Videogame {
 
-	public static final int PLAYERS_SIZE = 20; 
-	public static final int LEVELS_SIZE = 20; 
+	public static final int PLAYERS_SIZE = 21; 
+	public static final int LEVELS_SIZE = 21; 
 
 	private Player[] players; 
 	private Level[] levels;
-	private Enemy[] enemies;
-	private Treasure[] treasures;
-	
+
 	public Videogame(String nit) {
 		players = new Player[PLAYERS_SIZE];
 		players[1]=new Player("461556","ElSuperMegaPro",10,5,1);
@@ -51,14 +49,20 @@ public class Videogame {
 		}
 		return pos; 
 	}
+	public boolean levelImposibleToAdd(int numberLevel){
+		boolean imposibleToadd=false;
+		int levelAlreadyExist=validateIfLevelExist(numberLevel);
+			if(numberLevel>21||numberLevel<0){
+				 imposibleToadd=true;
+		}
+		return imposibleToadd;
+	}
 	public String addLevel(int numberLevel, int requiredScore){
-		String msj="No se ha podido anadir el nivel";
+		String msj="";
 		Level newLevel= new Level(numberLevel, requiredScore);
 		int levelAlreadyExist=validateIfLevelExist(numberLevel);
-			if(levelAlreadyExist==-1&&numberLevel<20&&numberLevel>0){
-				levels[numberLevel]=newLevel;
-				msj="Nuevo nivel anadido";
-			}
+		levels[numberLevel]=newLevel;
+		msj="Nuevo nivel anadido";
 		return msj;
 	}
 	public int validateIfLevelExist(int numberLevel){
@@ -163,7 +167,7 @@ public class Videogame {
 					msj="El jugador" + namePlayer + " ha incrementado su nivel a " + players[posPlayer].getLevel();
 				}
 					else{
-					msj="Al player"+namePlayer+" le faltan " + (levels[levelWherePlayerIs].getRequiredScoreToPassLevel()-actualScore)+ " puntos para incrementar su nivel";
+					msj="Al jugador"+namePlayer+" le faltan " + (levels[levelWherePlayerIs].getRequiredScoreToPassLevel()-actualScore)+ " puntos para incrementar su nivel";
 					}
 		return msj;
 	}
@@ -193,5 +197,44 @@ public class Videogame {
 			}
 		}
 	return msj;
+	}
+	public String countEnemiesInGame(int selectionType){
+		int count=0;
+		String msj="";
+		for(int i=1; i<LEVELS_SIZE;i++){
+			if(levels[i]!=null){
+				if(levels[i].countEnemyByType(selectionType)!=0){
+					count=count+levels[i].countEnemyByType(selectionType);
+					msj="Existe(n) " + count + " enemigos de este tipo en todo el juego";
+				}
+			}
+		}
+	return msj;
+	}
+	//public String showMostRepeatenTreasure(){
+		//int maxTreasure=0;
+		//String msj="";
+		//for(int i=1; i<LEVELS_SIZE;i++){
+		//	if(levels[i]!=null){
+		//		if(levels[i].mostRepeatenTreasure()<maxTreasure){
+		//			maxTreasure= levels[i].mostRepeatenTreasure();
+		//			msj="El tesoro más repetido es repetido" + maxTreasure;
+		//		}
+		//	}
+		//}	
+	//return msj;
+	//}
+	public String showMostValuableEnemyInGame(){
+		String msj="";
+		int scoreMostValuable=0;
+		for(int i=1;i<LEVELS_SIZE;i++){
+			if(levels[i]!=null){
+				if(levels[i].showScoreMostValuableEnemy()>scoreMostValuable){
+					scoreMostValuable=levels[i].showScoreMostValuableEnemy();
+					msj="El enemigo más valioso es de tipo "+levels[i].showTypeMostValuableEnemy()+" y se encuentra en el nivel "+levels[i].getNumber()+" y brinda un puntaje "+scoreMostValuable;
+				}
+			}
+		}
+	return msj;		
 	}
 }
