@@ -1,8 +1,8 @@
 package model; 
 
  public enum TypeEnemy{
-	OGRE, 
-	ABSTRACT, 
-	BOSS, 
-	MAGICIAN
+	OGRO, 
+	ABSTRACTO, 
+	JEFE, 
+	MAGICO
 }

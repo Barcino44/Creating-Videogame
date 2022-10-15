@@ -1,26 +1,43 @@
 package model;
 public class Treasure {
 
-	private String name;
+	private int selectionType;
 	private String url;
 	private int score;
 	private int quantyOfTreasure;
 	private int positionX;
 	private int positionY;
+	private TypeTreasure typeTreasure;
 	
-	public Treasure(String name, String url, int score, int quantyOfTreasure, int positionX, int positionY) {
-		this.name = name;
+	public Treasure(int selectionType, String url, int score, int quantyOfTreasure, int positionX, int positionY) {
+		this.selectionType=selectionType;
 		this.url = url;
 		this.score = score;
 		this.quantyOfTreasure=quantyOfTreasure;
 		this.positionX = positionX;
 		this.positionY=positionY;
+		setTypeTreasure();
+
 	}
-	public String getName() {
-		return name;
+	public int getSelectionType() {
+		return selectionType;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setTypeTreasure() {
+		if(selectionType==1){
+		typeTreasure=TypeTreasure.DIAMANTE;
+		}	
+		else if (selectionType==2){
+		typeTreasure=TypeTreasure.ESMERALDA;		
+		}
+		else if (selectionType==3){
+		typeTreasure=TypeTreasure.RUBI;
+		}
+		else if(selectionType==4){
+		typeTreasure=TypeTreasure.ORO;
+		}
+	}
+	public TypeTreasure getTypeTreasure(){
+		return typeTreasure;
 	}
 	public String getUrl() {
 		return url;
