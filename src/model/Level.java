@@ -35,30 +35,45 @@ public class Level {
 	public void setRequiredScoreToPassLevel(int requiredScoreToPassLevel) {
 		this.requiredScoreToPassLevel = requiredScoreToPassLevel;
 	}
+/**
+*addTreasureToLevel: It adds a enemy in a level.
+*@param treasure: Treasure - It represents the treasure(object) that is going to be added.
+*@return msj: String - It is a message to confirm that the treasure has been added.
+**/
 	public String addTreasureWithObject(Treasure treasure){
-		String msj="No se ha podido anadir el tesoro";
+		String msj="Failed to add the treasure";
 		boolean isEmpty=false;
 		for(int i = 1; i <TREASURE_SIZE && !isEmpty; i++){
 			if(treasures[i] == null){
 				treasures[i] = treasure; 
 				isEmpty = true; 
-				msj = "Nuevo(s) tesoro(s) anadido(s) al nivel "; 
+				msj = "New treasure(s) added to the level "; 
 			}
 		}
 		return msj;
 	}
+/**
+*addTreasureToLevel: It adds a enemy in a level.
+*@param enemy: Enemy - It represents the enemy(object) that is going to be added.
+*@return msj: String - It is a message to confirm that the enemy has been added.
+**/
 	public String addEnemyWithObject(Enemy enemy){
-		String msj="No se ha podido anadir el enemigo";
+		String msj="Failed to add the enemy";
 		boolean isEmpty=false;
 		for(int i = 1; i <ENEMY_SIZE && !isEmpty; i++){
 			if(enemies[i] == null){
 				enemies[i] = enemy; 
 				isEmpty = true; 
-				msj = "Nuevo enemigo anadido al nivel "; 
+				msj = "New enemy added to the level "; 
 			}
 		}
 		return msj;
 	}
+/**
+*validateIfEnemyAlreadyExist: It validates (with the id) if an enemy exist in the level. 
+*@param idEnemy: It is the id of the enemy.
+*@return enemyExist: boolean - It returns true if the enemy already exist in the level, else, returns false.
+**/
 	public boolean validateIfEnemyAlreadyExist(String idEnemy){
 		boolean enemyExist=false;
 		for (int i=1;i<ENEMY_SIZE&&!enemyExist;i++) {
@@ -70,39 +85,56 @@ public class Level {
 		}
 	return enemyExist;
 	}
+/**
+*showLevelInfo: It shows the information (treasures and enemies of a level).
+*@return msj: String - It returns the information of a level.
+**/
 	public String showLevelInfo(){
 		String msj="";
 		for(int i=1;i<TREASURE_SIZE;i++){
 			for (i=1;i<ENEMY_SIZE;i++) {
 				if(enemies[i]!=null&&treasures[i]!=null){
-					msj= msj+"\n"+ "Un enemigo " + enemies[i].getTypeEnemy()+" , "+ treasures[i].getQuantyOfTreasure()+ " tesoro(s) " + treasures[i].getTypeTreasure();
+					msj= msj+"\n"+ "An enemy " + enemies[i].getTypeEnemy()+" , "+ treasures[i].getQuantyOfTreasure()+ " treasure(s) " + treasures[i].getTypeTreasure();
 				}
 			}
 		}
 	return msj;
 	}
+/**
+*showOnlyEnemy: It shows the just an enemy in case that the position[i] of treasures is Empty (it complements the method showLevelInfo).
+*@return msj: String - It returns the enemy remaining.
+**/
 	public String showOnlyEnemy(){
 		String msj="";
 		for(int i=1;i<TREASURE_SIZE;i++){
 			for (i=1;i<ENEMY_SIZE;i++) {
 				if(enemies[i]!=null&&treasures[i]==null){
-					msj= msj+"\n"+ "Un enemigo " + enemies[i].getTypeEnemy();
+					msj= msj+"\n"+ "An enemy " + enemies[i].getTypeEnemy();
 				}
 			}
 		}
 		return msj;
 	}
+/**
+*showOnlyTreasure: It shows the just a treasure in case that the position[i] of enemies is Empty (it complements the method showLevelInfo).
+*@return msj: String - It returns the treasure remaining.
+**/
 	public String showOnlyTreasures(){
 		String msj="";
 		for(int i=1;i<TREASURE_SIZE;i++){
 			for (i=1;i<ENEMY_SIZE;i++) {
 				if(enemies[i]==null&&treasures[i]!=null){
-					msj= msj+"\n"+ treasures[i].getQuantyOfTreasure()+" tesoro(s) "+ treasures[i].getTypeTreasure();
+					msj= msj+"\n"+ treasures[i].getQuantyOfTreasure()+" treasure(s) "+ treasures[i].getTypeTreasure();
 				}
 			}
 		}
 		return msj;
 	}
+/**
+*countTreasureByType: It counts the quanty of a treasure in the level.
+*@param selectionTypeTreasure: int - It represents the treasure that the user has selected.
+*@return count: int - It represents the quanty of the selected treasure. 
+**/
 	public int countTreasureByType(int selectionTypeTreasure){
 		int count=0;
 		for(int i=1;i<TREASURE_SIZE;i++){
@@ -114,6 +146,11 @@ public class Level {
 		}
 		return count;
 	}
+/**
+*countTreasureByType: It counts the quanty of an enemy in the level.
+*@param selectionTypeTreasure: int - It represents the enemy that the user has selected.
+*@return count: int - It represents the quanty of the selected enemy. 
+**/
 	public int countEnemyByType(int selectionTypeEnemy){
 		int count=0;
 		for(int i=1;i<ENEMY_SIZE;i++){
@@ -125,6 +162,10 @@ public class Level {
 		}
 	return count;
 	}
+/**
+*countDiamondsInLevel: It counts the quanty of DIAMONDS present in a level.
+*@return countDiamonds: int - It is the quanty of DIAMONDS found in a level.
+**/
 	public int countDiamondsInLevel(){
 	int countDiamonds=0;
 		for (int i=1; i<TREASURE_SIZE; i++){
@@ -136,6 +177,10 @@ public class Level {
 		}
 		return countDiamonds;
 	}
+/**
+*countEsmeraldsInLevel: It counts the quanty of the ESMERALDS present in a level.
+*@return countEsmeralds: int - It is the quanty of ESMERALDS found in a level.
+**/
 	public int countEsmeraldsInLevel(){
 	int countEsmeralds=0;
 		for (int i=1; i<TREASURE_SIZE; i++){
@@ -147,6 +192,10 @@ public class Level {
 		}
 		return countEsmeralds;
 	}
+/**
+*countRubiesInLevel: It counts the quanty of the RUBIES present in a level.
+*@return countRubies: int - It is the quanty of RUBIES found in a level.
+**/
 	public int countRubiesInLevel(){
 	int countRubies=0;
 		for (int i=1; i<TREASURE_SIZE; i++){
@@ -158,6 +207,10 @@ public class Level {
 		}
 		return countRubies;
 	}
+/**
+*countGoldsInLevel: It counts the quanty of the GOLDS present in a level.
+*@return countGolds: int - It is the quanty of GOLDS found in a level.
+**/
 	public int countGoldsInLevel(){
 	int countGolds=0;
 		for (int i=1; i<TREASURE_SIZE; i++){
@@ -169,7 +222,10 @@ public class Level {
 		}
 		return countGolds;
 	}
-
+/**
+*showScoreMostValuableEnemy: It searches the most valuable enemy in the level.
+*@return scoreMostValuableEnemy: int - It is the score of the mosit valuable enemy in the level, in case that exist two or else with the same score, return -1.
+**/
 	public int showScoreMostValuableEnemy(){
 		int scoreMostValuableEnemy=0;
 		for(int i=1;i<ENEMY_SIZE;i++){
@@ -184,6 +240,10 @@ public class Level {
 		}
 		return scoreMostValuableEnemy;
 	}
+/**
+*showScoreMostValuableEnemy: It searches the most valuable enemy in the level.
+*@return scoreMostValuableEnemy: TypeEnemy - It is the score of the most valuable enemy in the level, in case that exist two or else with the same score, return -1.
+**/
 	public TypeEnemy showTypeMostValuableEnemy(){
 		TypeEnemy enemyType=null;
 		int scoreMostValuableEnemy=0;
@@ -197,6 +257,11 @@ public class Level {
 		}
 		return enemyType;
 	}
+/**
+*convertTypeEnemytoString: It converts a type enemy a String, in order to count its consonants.
+*@param selectionType: int - It represents the enemy that the user has selected.
+*@return str: String - It is the type of enemy converted in String.
+**/
 	public String convertTypeEnemytoString(int selectionType){
 		int count=0;
 		TypeEnemy enemyType=null;
@@ -211,6 +276,11 @@ public class Level {
 		}
 	return str;
 	}
+/**
+*countConsonantsEnemy: It counts the consonants that are present in the type of enemy selected.
+*@param selectionType: int - It represents the enemy that the user has been selected.
+*@return consonantsCount: int - It is the quanty of consonants present in a type of enemy.
+**/
 	public int countConsonantsEnemy(int selectionType){
 		String typeEnemy=convertTypeEnemytoString(selectionType);
 		int consonantsCount=0;

@@ -24,16 +24,16 @@ public class Treasure {
 	}
 	public void setTypeTreasure() {
 		if(selectionType==1){
-		typeTreasure=TypeTreasure.DIAMANTE;
+		typeTreasure=TypeTreasure.DIAMOND;
 		}	
 		else if (selectionType==2){
-		typeTreasure=TypeTreasure.ESMERALDA;		
+		typeTreasure=TypeTreasure.ESMERALD;		
 		}
 		else if (selectionType==3){
-		typeTreasure=TypeTreasure.RUBI;
+		typeTreasure=TypeTreasure.RUBY;
 		}
 		else if(selectionType==4){
-		typeTreasure=TypeTreasure.ORO;
+		typeTreasure=TypeTreasure.GOLD;
 		}
 	}
 	public TypeTreasure getTypeTreasure(){

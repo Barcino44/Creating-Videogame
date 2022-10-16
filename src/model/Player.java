@@ -15,7 +15,6 @@ public class Player{
 		this.level = level;
 	}
 	
-
 	public String getId() {
 		return id;
 	}

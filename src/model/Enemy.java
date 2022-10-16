@@ -30,16 +30,16 @@ public class Enemy {
 	}
 	public void setTypeEnemy(){
 		if(selectionType==1){
-		typeEnemy=TypeEnemy.OGRO;
+		typeEnemy=TypeEnemy.OGRE;
 		}	
 		else if (selectionType==2){
-		typeEnemy=TypeEnemy.ABSTRACTO;		
+		typeEnemy=TypeEnemy.ABSTRACT;		
 		}
 		else if (selectionType==3){
-		typeEnemy=TypeEnemy.JEFE;
+		typeEnemy=TypeEnemy.BOSS;
 		}
 		else if(selectionType==4){
-		typeEnemy=TypeEnemy.MAGICO;
+		typeEnemy=TypeEnemy.MAGICIAN;
 		}
 	}
 	public TypeEnemy getTypeEnemy(){
