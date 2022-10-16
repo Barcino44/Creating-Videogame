@@ -70,17 +70,6 @@ public class Level {
 		}
 	return enemyExist;
 	}
-	//public boolean validateIfTreasureExist(String treasureName){
-	//	boolean treasureExist=false;
-	///	for (int i=1;i<TREASURE_SIZE&&!treasureExist;i++) {
-		///	if(treasures[i]!=null){
-			///	if(treasures[i].getName().equals(treasureName)){
-				//	treasureExist=true;
-			//	}
-		//	}
-	//	}
-	//return treasureExist;
-	//}
 	public String showLevelInfo(){
 		String msj="";
 		for(int i=1;i<TREASURE_SIZE;i++){

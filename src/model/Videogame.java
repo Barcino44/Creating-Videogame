@@ -108,17 +108,6 @@ public class Videogame {
 		}
 		return enemyExist;
 	}
-	//public boolean validateIfTreasureExist(String treasureName){
-	//	boolean treasureExist=false;
-	//	for(int i=1;i<LEVELS_SIZE; i++) {
-	//		if(levels[i]!=null){
-	//			if(levels[i].validateIfTreasureExist(treasureName)==true){
-	//			treasureExist=true;
-	//			}
-	//		}
-	//	}
-	//	return treasureExist;
-	//}
 	public String addEnemyToLevel(int numberLevel, String id, int selectionType, int scoreWin, int scoreLose){
 		String msj="No se ha podido anadir el enemigo";
 		int positionX=(int)Math.random()*1281;
@@ -258,5 +247,30 @@ public class Videogame {
 	public String showConsonantsEnemy(int selectionType){
 		String msj="El enemigo tiene "+levels[1].countConsonantsEnemy(selectionType)+" consonantes ";
 		return msj;
+	}
+	public Player[] ordenatePlayersInGame(){
+		Player actualPlayer=null;
+		Player[] ordenatedPlayers=players;
+		for (int i=1; i<PLAYERS_SIZE; i++){
+			for (int j=1; j<PLAYERS_SIZE-1;j++){
+				if(players[j+1]!=null){
+					if(players[j].getScore()<players[j+1].getScore()){
+						actualPlayer=players[j];
+						players[j]=players[j+1];
+						players[j+1]=actualPlayer;
+					}
+				}
+			}
+		}
+		return ordenatedPlayers;
+	}
+	public String showBestPlayersInGame(){
+		String msj="";
+		for(int i=1; i<6;i++){
+			if(ordenatePlayersInGame()[i]!=null){
+			msj=msj+"\n"+" Top "+ i + ordenatePlayersInGame()[i].getName()+ " Con un puntaje de "+ ordenatePlayersInGame()[i].getScore();
+			}
+		}	
+	return msj;
 	}
 }

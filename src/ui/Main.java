@@ -51,7 +51,8 @@ public class Main{
 			"9.Mostrar la cantidad de enemigos dado un tipo\n"+
 			"10.Mostrar el tesoro mas repetido\n"+
 			"11.Mostrar el enemigo que brinda mas puntaje y el nivel donde se encuentra\n"+
-			"12.Mostrar la cantidad de consonantes de algun enemigo";  
+			"12.Mostrar la cantidad de consonantes de algun enemigo\n"+
+			"13.Mostrar top 5 de los jugadores";  
 	}
 	// this method executes the option
 	public void executeOption(int option){
@@ -341,8 +342,11 @@ public class Main{
 					}
 					msj=videogame.showConsonantsEnemy(selectionTypeEnemy);
 					System.out.println(msj);
-					break;
-
+					break;	
+				case 13:
+					msj=videogame.showBestPlayersInGame();
+					System.out.println(msj);
+				break;
 				case 0: 
 					System.out.println("Exit program.");
 					break; 
