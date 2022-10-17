@@ -287,7 +287,7 @@ public class Level {
 		typeEnemy=typeEnemy.toLowerCase();
 		for(int i=0; i<typeEnemy.length(); i++){
 			char ch=typeEnemy.charAt(i);
-			if(ch=='q'||ch=='w'||ch=='r'||ch=='t'||ch=='y'||ch=='p'||ch=='s'||ch=='d'||ch=='f'||ch=='g'||ch=='h'||ch=='j'||ch=='k'||ch=='l'||ch=='ñ'||ch=='z'||ch=='x'||ch=='c'||ch=='v'||ch=='b'||ch=='n'||ch=='m'){
+			if(ch=='q'||ch=='w'||ch=='r'||ch=='t'||ch=='y'||ch=='p'||ch=='s'||ch=='d'||ch=='f'||ch=='g'||ch=='h'||ch=='j'||ch=='k'||ch=='l'||ch=='z'||ch=='x'||ch=='c'||ch=='v'||ch=='b'||ch=='n'||ch=='m'){
 				consonantsCount++;
 			}
 		}

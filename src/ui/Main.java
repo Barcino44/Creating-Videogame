@@ -40,7 +40,7 @@ public class Main{
 	public String printMenu(){
 		return 
 			"<<-<< <<-<< Welcome >>->> >>->>\n" +
-			"1.Create a player \n" +
+			"1.Add a player \n" +
 			"2.Add a level\n"+
 			"3.Add a treasure to a level \n"+
 			"4.Add an enemy to a level\n"+
@@ -297,7 +297,7 @@ public class Main{
 					}	
 					numberLevel=reader.nextInt();
 					if(videogame.validateIfLevelExist(numberLevel)==-1){
-							System.out.println("The level doesn't exist");
+						System.out.println("The level doesn't exist");
 					}
 					else{
 						//Show information
@@ -392,7 +392,7 @@ public class Main{
 	}
 
 	public void initVideogame(){
-		System.out.println("Welcometo Barcino's Game enter your name");
+		System.out.println("Welcome to Barcino's Game enter your name");
 		String name = reader.nextLine(); 
 		this.videogame = new Videogame(name);
 
